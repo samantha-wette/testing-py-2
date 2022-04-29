@@ -30,8 +30,11 @@ def rsvp():
 
 @app.route("/games")
 def games():
-    games = Game.query.all()
-    return render_template("games.html", games=games)
+    if 'RSVP' in session:
+        games = Game.query.all()
+        return render_template("games.html", games=games)
+    else:
+        return redirect("/")
 
 
 if __name__ == "__main__":
@@ -39,4 +42,4 @@ if __name__ == "__main__":
     app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
     DebugToolbarExtension(app)
     connect_to_db(app)
-    app.run(host="0.0.0.0")
+    app.run()

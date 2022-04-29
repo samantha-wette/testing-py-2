@@ -8,7 +8,6 @@ def load_games():
     for i, row in enumerate(open("data/games.csv")):
         row = row.rstrip()
         name, description = row.split("|")
-
         game = Game(name=name, description=description)
 
         # We need to add to the session or it won't ever be stored
